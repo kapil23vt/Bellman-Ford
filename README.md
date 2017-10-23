@@ -17,12 +17,17 @@ Enter the number of Edges in the graph 3
 Enter start-end-weight for the edges
 
 1 2 2
+
 2 3 1
+
 1 3 4
 
 Enter the source node 1
 
 Vertex Distance from Source
+
 1 0
+
 2 2
+
 3 3
