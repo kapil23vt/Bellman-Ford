@@ -5,17 +5,20 @@
 #include <string.h>
 #include <limits.h>
 
+// Each edge has source, destination and weight
 struct Edge
 {
     int src, dest, weight;
 };
 
+// Each graph has number of vertices, edges and "edges"
 struct Graph
 {
     int V, E;
     struct Edge* edge;
 };
 
+// Create graph for say 3 vertices and 4 edges
 struct Graph* createGraph(int V, int E)
 {
     struct Graph* graph =(struct Graph*) malloc(sizeof(struct Graph));
@@ -25,12 +28,14 @@ struct Graph* createGraph(int V, int E)
     return graph;
 }
 
+// dist[V] will store shortest distance values
 void printArr(int dist[], int n)
 {
     printf("Vertex Distance from Source\n");
     for (int i = 1; i <= n; ++i)
         printf("%d %d\n", i, dist[i]);
 }
+
 
 void BellmanFord(struct Graph* graph, int src)
 {
@@ -39,7 +44,7 @@ void BellmanFord(struct Graph* graph, int src)
     int dist[V];
 
     // Initialize distances from source to other all nodes as INFINITE
-    for (int i = 1; i <= V; i++)
+    for (int i = 0; i < V; i++)
         dist[i]   = INT_MAX;
 
     dist[src] = 0; // Distance to source node itself is zero
@@ -48,11 +53,12 @@ void BellmanFord(struct Graph* graph, int src)
 
     // Iterating through all the vertices
     // We just do not use information from neighbors, we consider all nodes in network
-    for (int i = 2; i <= V; i++)
+    for (int i = 1; i < V; i++)
     {
         // Iterating through each edge for every vertices
-        for (int j = 1; j <= E; j++)
+        for (int j = 0; j < E; j++)
         {
+            // For each edge, we are storing src, dest and weight values
             int u = graph->edge[j].src;
             int v = graph->edge[j].dest;
             int weight = graph->edge[j].weight;
@@ -61,19 +67,6 @@ void BellmanFord(struct Graph* graph, int src)
             if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
                 dist[v] = dist[u] + weight;
         }
-    }
-
-    //check for negative-weight cycles. The above step guarantees shortest
-    //distances if graph doesn't contain negative weight cycle.
-    //If we get a shorter path, then there is a cycle.
-
-    for (int i = 1; i <= E; i++)
-    {
-        int u = graph->edge[i].src;
-        int v = graph->edge[i].dest;
-        int weight = graph->edge[i].weight;
-        if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
-            printf("Graph contains negative weight cycle");
     }
     printArr(dist, V);
     return;
@@ -88,7 +81,7 @@ int main()
 
     struct Graph* graph = createGraph(V, E);
     printf("Enter start-end-weight for the edges\n");
-    for (int x = 1 ; x<= E ; x++){
+    for (int x = 0 ; x< E ; x++){
 
     scanf("%d", &graph->edge[x].src);
     scanf("%d", &graph->edge[x].dest);
