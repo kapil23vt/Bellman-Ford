@@ -11,12 +11,17 @@ At the end, user is asked to enter the node from which the minimum distance to o
 For example, for 1->2 (2), 2->3(1), and 1->3(4) directed graph
 
 Enter the number of Vertices in the graph 3
+
 Enter the number of Edges in the graph 3
+
 Enter start-end-weight for the edges
+
 1 2 2
 2 3 1
 1 3 4
+
 Enter the source node 1
+
 Vertex Distance from Source
 1 0
 2 2
