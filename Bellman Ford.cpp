@@ -1,4 +1,5 @@
 // Bellman ford code implementation for Directed Graph
+// This project works for negative edge weight scenarios too!
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,13 +45,19 @@ void BellmanFord(struct Graph* graph, int src)
     dist[src] = 0; // Distance to source node itself is zero
 
     //Applying Bellman Ford Algorithm
+
+    // Iterating through all the vertices
+    // We just do not use information from neighbors, we consider all nodes in network
     for (int i = 2; i <= V; i++)
     {
+        // Iterating through each edge for every vertices
         for (int j = 1; j <= E; j++)
         {
             int u = graph->edge[j].src;
             int v = graph->edge[j].dest;
             int weight = graph->edge[j].weight;
+
+            // Apply distance vector formula
             if (dist[u] != INT_MAX && dist[u] + weight < dist[v])
                 dist[v] = dist[u] + weight;
         }
